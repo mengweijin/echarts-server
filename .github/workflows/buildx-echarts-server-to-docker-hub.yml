@@ -1,0 +1,53 @@
+name: buildx echarts-server to docker hub
+
+on:
+  workflow_dispatch:  # 允许手动触发工作流
+  push:
+    tags:            # 推送特定格式的 tag 时触发
+      - 'echarts-server*'
+
+env:
+  REGISTRY: hub.docker.com
+  NAMESPACE: mengweijin
+  TARGET_IMAGE_NAME: echarts-server  # 转存到阿里云 ACR 后的镜像名称
+  TARGET_IMAGE_TAG: 6.0.0  # 转存到阿里云 ACR 后的镜像版本
+
+jobs:
+  sync-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4  # 检出代码，虽然可能不需要构建代码，但保留此步骤有时有助于调试
+
+      - name: Set up QEMU for multi-arch build
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64,amd64  # 启用 arm64 和 amd64 架构的仿真支持
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3  # 设置 Docker Buildx，支持多平台构建
+        id: buildx
+
+      - name: Login to Aliyun ACR
+        uses: docker/login-action@v3  # 登录阿里云镜像仓库
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push multi-arch image to Aliyun ACR
+        uses: docker/build-push-action@v5
+        with:
+          platforms: linux/amd64,linux/arm64  # 指定目标平台
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.TARGET_IMAGE_NAME }}:${{ env.TARGET_IMAGE_TAG }}
+          annotations: |
+            org.opencontainers.image.documentation=https://github.com/mengweijin/echarts-server/README.md
+          context: .          # 构建上下文设为工作目录
+          file: ./Dockerfile  # 显式指定路径
+
+      - name: docker buildx imagetools inspect
+        run: |
+          docker buildx imagetools inspect ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.TARGET_IMAGE_NAME }}:${{ env.TARGET_IMAGE_TAG }}

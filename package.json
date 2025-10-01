@@ -1,0 +1,22 @@
+{
+  "name": "echarts-server",
+  "version": "1.0.0",
+  "description": "一个 NodeJS 服务用于后台渲染（SSR）生成 ECharts 图片",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mengweijin/echarts-server.git"
+  },
+  "author": "Meng Wei jin <aday.fun@outlook.com>",
+  "license": "Apache License 2.0",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "echarts": "^6.0.0",
+    "express": "^5.1.0",
+    "sharp": "^0.34.4"
+  }
+}
