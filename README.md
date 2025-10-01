@@ -18,7 +18,7 @@
 	</a>
 </p>
 
-一个 NodeJS 服务，提供后台接口（SSR渲染）生成 ECharts 图片。
+一个 NodeJS 服务，提供后台接口（SSR渲染）生成 ECharts 图片。可 Docker 启动。
 
 ## 源码启动
 
