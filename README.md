@@ -120,11 +120,14 @@ curl -X POST http://localhost:3000?type=svg&width=800&height=600 -o echarts.png 
 docker 镜像的版本和使用的 echarts 版本保持一致。
 
 ```shell
+docker pull mengweijin/echarts-server:6.0.0
+
 docker run \
 --name echarts-server \
 -p 3000:3000 \
 --restart=on-failure:3 \
 -d mengweijin/echarts-server:6.0.0
+
 ```
 
 ## Echarts Options 的构建
