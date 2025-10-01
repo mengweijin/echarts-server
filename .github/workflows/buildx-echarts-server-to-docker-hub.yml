@@ -7,10 +7,9 @@ on:
       - 'echarts-server*'
 
 env:
-  REGISTRY: hub.docker.com
   NAMESPACE: mengweijin
-  TARGET_IMAGE_NAME: echarts-server  # 转存到阿里云 ACR 后的镜像名称
-  TARGET_IMAGE_TAG: 6.0.0  # 转存到阿里云 ACR 后的镜像版本
+  TARGET_IMAGE_NAME: echarts-server  # 转存到 Docker Hub 后的镜像名称
+  TARGET_IMAGE_TAG: 6.0.0  # 转存到 Docker Hub 后的镜像版本
 
 jobs:
   sync-image:
@@ -29,10 +28,9 @@ jobs:
         uses: docker/setup-buildx-action@v3  # 设置 Docker Buildx，支持多平台构建
         id: buildx
 
-      - name: Login to Aliyun ACR
+      - name: Login to Docker Hub
         uses: docker/login-action@v3  # 登录阿里云镜像仓库
         with:
-          registry: ${{ env.REGISTRY }}
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
@@ -42,7 +40,7 @@ jobs:
           platforms: linux/amd64,linux/arm64  # 指定目标平台
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.TARGET_IMAGE_NAME }}:${{ env.TARGET_IMAGE_TAG }}
+            ${{ env.NAMESPACE }}/${{ env.TARGET_IMAGE_NAME }}:${{ env.TARGET_IMAGE_TAG }}
           annotations: |
             org.opencontainers.image.documentation=https://github.com/mengweijin/echarts-server/README.md
           context: .          # 构建上下文设为工作目录
@@ -50,4 +48,4 @@ jobs:
 
       - name: docker buildx imagetools inspect
         run: |
-          docker buildx imagetools inspect ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.TARGET_IMAGE_NAME }}:${{ env.TARGET_IMAGE_TAG }}
+          docker buildx imagetools inspect ${{ env.NAMESPACE }}/${{ env.TARGET_IMAGE_NAME }}:${{ env.TARGET_IMAGE_TAG }}
