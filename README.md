@@ -1,6 +1,12 @@
 # echarts-server
 
 <p align="center">
+    <a target="_blank" href="https://github.com/mengweijin/echarts-server">
+		<img src="https://img.shields.io/badge/repo-Github-purple" />
+	</a>
+    <a target="_blank" href="https://gitee.com/mengweijin/echarts-server">
+		<img src="https://img.shields.io/badge/repo-码云 Gitee-purple" />
+	</a>
     <a target="_blank" href="https://hub.docker.com/r/mengweijin/echarts-server/tags">
 		<img src="https://img.shields.io/docker/v/mengweijin/echarts-server?label=docker image version" />
 	</a>
