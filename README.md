@@ -151,5 +151,5 @@ echarts SSR 参考文档：<https://echarts.apache.org/handbook/zh/how-to/cross-
 私有镜像：
 
 ```shell
-docker pull registry.cn-hangzhou.aliyuncs.com/adayfun/echarts-server:6.0.0
+docker pull registry.cn-hangzhou.aliyuncs.com/mengweijin/echarts-server:6.0.0
 ```
