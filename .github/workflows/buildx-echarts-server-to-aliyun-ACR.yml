@@ -10,7 +10,7 @@ env:
   REGISTRY: registry.cn-hangzhou.aliyuncs.com
   NAMESPACE: mengweijin
   TARGET_IMAGE_NAME: echarts-server  # 转存到阿里云 ACR 后的镜像名称
-  TARGET_IMAGE_TAG: 6.0.0  # 转存到阿里云 ACR 后的镜像版本
+  TARGET_IMAGE_TAG: 6.0.0.1  # 转存到阿里云 ACR 后的镜像版本
 
 jobs:
   sync-image:

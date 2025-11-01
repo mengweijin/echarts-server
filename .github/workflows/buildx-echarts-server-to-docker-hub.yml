@@ -9,7 +9,7 @@ on:
 env:
   NAMESPACE: mengweijin
   TARGET_IMAGE_NAME: echarts-server  # 转存到 Docker Hub 后的镜像名称
-  TARGET_IMAGE_TAG: 6.0.0  # 转存到 Docker Hub 后的镜像版本
+  TARGET_IMAGE_TAG: 6.0.0.1  # 转存到 Docker Hub 后的镜像版本
 
 jobs:
   sync-image:

@@ -26,6 +26,23 @@
 
 一个 NodeJS 服务，提供后台接口（SSR渲染）生成 ECharts 图片。可 Docker 启动。
 
+## Docker 启动
+
+docker 镜像版本的前面部分和使用的 echarts 版本保持一致，镜像版本的最后一个部分为额外 echarts-server 小版本。
+
+比如镜像版本 `6.0.0.1` 版本，表示使用 `echarts` 版本为 `6.0.0`，最后面的 `1` 为 `echarts-server` 的第一个版本。
+
+```shell
+docker pull mengweijin/echarts-server:6.0.0.1
+
+docker run \
+--name echarts-server \
+-p 3000:3000 \
+--restart=on-failure:3 \
+-d mengweijin/echarts-server:6.0.0.1
+
+```
+
 ## 源码启动
 
 前提：需要 NodeJS 环境。
@@ -121,21 +138,6 @@ curl -X POST http://localhost:3000?type=svg&width=800&height=600 -o echarts.png 
     }'
 ```
 
-## Docker 启动
-
-docker 镜像的版本和使用的 echarts 版本保持一致。
-
-```shell
-docker pull mengweijin/echarts-server:6.0.0
-
-docker run \
---name echarts-server \
--p 3000:3000 \
---restart=on-failure:3 \
--d mengweijin/echarts-server:6.0.0
-
-```
-
 ## Echarts Options 的构建
 
 请求体要符合 echarts 的格式的 JSON 对象，其中东西比较多，那么如何更方便的构建呢？提供以下几个思路。
@@ -151,5 +153,5 @@ echarts SSR 参考文档：<https://echarts.apache.org/handbook/zh/how-to/cross-
 私有镜像：
 
 ```shell
-docker pull registry.cn-hangzhou.aliyuncs.com/mengweijin/echarts-server:6.0.0
+docker pull registry.cn-hangzhou.aliyuncs.com/mengweijin/echarts-server:6.0.0.1
 ```
