@@ -149,9 +149,3 @@ curl -X POST http://localhost:3000?type=svg&width=800&height=600 -o echarts.png 
 ## 其它
 
 echarts SSR 参考文档：<https://echarts.apache.org/handbook/zh/how-to/cross-platform/server/>
-
-私有镜像：
-
-```shell
-docker pull registry.cn-hangzhou.aliyuncs.com/mengweijin/echarts-server:6.0.0.1
-```
