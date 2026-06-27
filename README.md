@@ -33,14 +33,11 @@ docker 镜像版本的前面部分和使用的 echarts 版本保持一致，镜�
 比如镜像版本 `6.0.0.1` 版本，表示使用 `echarts` 版本为 `6.0.0`，最后面的 `1` 为 `echarts-server` 的第一个版本。
 
 ```shell
-docker pull mengweijin/echarts-server:6.0.0.1
-
 docker run \
 --name echarts-server \
 -p 3000:3000 \
---restart=on-failure:3 \
+--restart=unless-stopped \
 -d mengweijin/echarts-server:6.0.0.1
-
 ```
 
 ## 源码启动
@@ -142,16 +139,11 @@ curl -X POST http://localhost:3000?type=svg&width=800&height=600 -o echarts.png 
 
 请求体要符合 echarts 的格式的 JSON 对象，其中东西比较多，那么如何更方便的构建呢？提供以下几个思路。
 
-1. 使用 JSONObject 直接手动构建，这个有点费劲。
-2. 应用后端准备 *.json 文件模板，由应用后端读取后，替换关键数据参数，再调用 echarts-server 服务接口，以实现后端生成图片。
-3. 使用 ECharts-Java 组件构建 Options：<https://github.com/ECharts-Java/ECharts-Java>
+1. 一般前端都有展示图表的地方，前端肯定会构建一个 options 对象，可以直接获取，然后发送给 echarts-server 服务。
+2. 应用后端准备 options.json 文件模板，由应用后端读取后，替换关键数据参数，再发送给 echarts-server 服务。
+3. 使用 JSONObject 直接手动构建，然后发送给 echarts-server 服务（(⊙﹏⊙) 这个太费劲。）。
+4. 使用 ECharts-Java 组件构建 Options：<https://github.com/ECharts-Java/ECharts-Java> （这个依赖第三方）。
 
 ## 其它
 
 echarts SSR 参考文档：<https://echarts.apache.org/handbook/zh/how-to/cross-platform/server/>
-
-私有镜像：
-
-```shell
-docker pull registry.cn-hangzhou.aliyuncs.com/mengweijin/echarts-server:6.0.0.1
-```

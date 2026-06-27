@@ -5,7 +5,8 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "check": "npm-check -u"
   },
   "repository": {
     "type": "git",
@@ -14,9 +15,12 @@
   "author": "Meng Wei jin <aday.fun@outlook.com>",
   "license": "Apache License 2.0",
   "dependencies": {
-    "cors": "^2.8.5",
-    "echarts": "^6.0.0",
-    "express": "^5.1.0",
-    "sharp": "^0.34.4"
+    "cors": "^2.8.6",
+    "echarts": "^6.1.0",
+    "express": "^5.2.1",
+    "sharp": "^0.35.1"
+  },
+  "devDependencies": {
+    "npm-check": "^6.0.1"
   }
 }

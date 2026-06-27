@@ -9,7 +9,7 @@ on:
 env:
   NAMESPACE: mengweijin
   TARGET_IMAGE_NAME: echarts-server  # 转存到 Docker Hub 后的镜像名称
-  TARGET_IMAGE_TAG: 6.0.0.1  # 转存到 Docker Hub 后的镜像版本
+  TARGET_IMAGE_TAG: 6.1.0.1  # 转存到 Docker Hub 后的镜像版本
 
 jobs:
   sync-image:
@@ -34,7 +34,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push multi-arch image to Aliyun ACR
+      - name: Build and push multi-arch image to Docker Hub
         uses: docker/build-push-action@v5
         with:
           platforms: linux/amd64,linux/arm64  # 指定目标平台
